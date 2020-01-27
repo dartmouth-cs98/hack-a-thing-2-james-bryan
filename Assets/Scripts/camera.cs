@@ -14,21 +14,25 @@ public class camera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     if(Input.GetKey(KeyCode.RightArrow))
+     if(Input.GetKey(KeyCode.D))
      {
-         transform.Translate(new Vector3(speed * Time.deltaTime,0,0));
+         transform.Translate(new Vector3(speed * Time.deltaTime,0,0), Space.World);
      }
-     if(Input.GetKey(KeyCode.LeftArrow))
+     if(Input.GetKey(KeyCode.A))
      {
-         transform.Translate(new Vector3(-speed * Time.deltaTime,0,0));
+         transform.Translate(new Vector3(-speed * Time.deltaTime,0,0), Space.World);
      }
-     if(Input.GetKey(KeyCode.DownArrow))
+     if(Input.GetKey(KeyCode.S))
      {
-         transform.Translate(new Vector3(0,0, -speed * Time.deltaTime));
+         transform.Translate(new Vector3(0,0, -speed * Time.deltaTime), Space.World);
      }
-     if(Input.GetKey(KeyCode.UpArrow))
+     if(Input.GetKey(KeyCode.W))
      {
-         transform.Translate(new Vector3(0,0, speed * Time.deltaTime));
+         transform.Translate(new Vector3(0,0, speed * Time.deltaTime), Space.World);
      }
- }
+
+    float mouseX = (Input.mousePosition.x / Screen.width) - 0.5f;
+    float mouseY = (Input.mousePosition.y / Screen.height) - 0.5f;
+    transform.localRotation = Quaternion.Euler(new Vector4(-1f * (mouseY * 180f), mouseX * 360f, transform.localRotation.z));
+    }
 }
